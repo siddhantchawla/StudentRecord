@@ -61,7 +61,7 @@ def register(request):
     		user = authenticate(username = username, password = password)
     		login(request, user)
     		return redirect('/home')
-        # return redirect('/auth/login')
+        
         
     return render(request, 'authentication/register.html', None)
 

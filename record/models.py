@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from datetime import datetime   
 
 
-# Create your models here.
+
 class Record(models.Model):
 	regNum = models.CharField(max_length=10) 
 	status = models.IntegerField()

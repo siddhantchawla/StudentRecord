@@ -43,7 +43,7 @@ def scan(request):
 	data = qr.decode("utf-8")
 	s = data[:10]
 	reg = data[10:]
-	print("hash    "+request.session['hash'])
+	print("hash 22   "+request.session['hash'])
 	if s==request.session['hash']:
 		obj = Record.objects.filter(regNum = reg,status = 1).first()
 		if obj:
@@ -52,11 +52,12 @@ def scan(request):
 		else:
 			ob = Record(regNum = reg,status = 1)
 			ob.save()
+			#
 	# request.session['hash'] = randomString(10)
 	return redirect('/scan')
 	
 
-@user_passes_test(test)
+
 @login_required(login_url = '/auth/login')
 def list(request):
 	rec = Record.objects.filter(status = 1).order_by('-date')
@@ -64,10 +65,10 @@ def list(request):
 	data['student'] = []
 	for l in rec:
 		d = {}
-		user = Userprofile.objects.filter(regNum = l.regNum).first()
-		u = User.objects.filter(user = user).first
+		us = Userprofile.objects.filter(regNum = l.regNum).first()
+		u = User.objects.filter(username = us.user.username).first()
 		d['name'] = u.first_name + " " + u.last_name
-		d['contact'] = l.contact
+		d['contact'] = us.contact
 		d['regNum'] = l.regNum
 		d['date'] = l.date
 		data['student'].append(d)

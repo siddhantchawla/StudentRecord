@@ -23,5 +23,4 @@ def scanned():
         
                
 
-# When everything done, release the capture
 
